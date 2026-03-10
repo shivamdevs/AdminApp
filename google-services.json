@@ -1,0 +1,29 @@
+{
+	"project_info": {
+		"project_number": "479548623485",
+		"project_id": "shivamdevs-admin-app",
+		"storage_bucket": "shivamdevs-admin-app.firebasestorage.app"
+	},
+	"client": [
+		{
+			"client_info": {
+				"mobilesdk_app_id": "1:479548623485:android:8cacb35d5350a56fefbf14",
+				"android_client_info": {
+					"package_name": "com.shivamdevs.admin"
+				}
+			},
+			"oauth_client": [],
+			"api_key": [
+				{
+					"current_key": "AIzaSyDQRNcw8bPd-XSPniplge5dTufjzv4BCb8"
+				}
+			],
+			"services": {
+				"appinvite_service": {
+					"other_platform_oauth_client": []
+				}
+			}
+		}
+	],
+	"configuration_version": "1"
+}
