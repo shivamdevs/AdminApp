@@ -1,25 +1,32 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
-  },
-  "cSpell.words": [
-    "appinvite",
-    "Consolas",
-    "firebasestorage",
-    "Hiragino",
-    "Maru",
-    "Meiryo",
-    "Menlo",
-    "mobilesdk",
-    "Nativewind",
-    "Pniplge",
-    "Segoe",
-    "shivamdevs",
-    "shivamdevsadmin",
-    "Tamagui",
-    "Tufjzv",
-    "unistyles"
-  ]
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit",
+		"source.organizeImports": "explicit",
+		"source.sortMembers": "explicit"
+	},
+	"css.lint.unknownAtRules": "ignore",
+	"cSpell.words": [
+		"appinvite",
+		"Consolas",
+		"firebasestorage",
+		"Hiragino",
+		"lightningcss",
+		"Maru",
+		"Meiryo",
+		"Menlo",
+		"mobileprovision",
+		"mobilesdk",
+		"Nativewind",
+		"Pniplge",
+		"pocketbase",
+		"Segoe",
+		"shadcn",
+		"shivamdevs",
+		"shivamdevsadmin",
+		"Tamagui",
+		"Tufjzv",
+		"unistyles",
+		"unrs",
+		"worklets"
+	]
 }
