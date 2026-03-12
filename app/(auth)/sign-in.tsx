@@ -63,16 +63,19 @@ export default function SignInScreen() {
 				)}
 			/>
 
-			{errorMessage ? (
-				<Text className="mt-3 text-sm text-rose-500">{errorMessage}</Text>
-			) : null}
+			{errorMessage
+				? (
+					<Text className="mt-3 text-sm text-rose-500">
+						{errorMessage}
+					</Text>
+				)
+				: null}
 
 			<Button
 				title={isLoading ? "Signing in..." : "Sign in"}
 				onPress={handleSignIn}
-				disabled={
-					isLoading || !identity || !password || !envFlags.hasPocketBaseUrl
-				}
+				disabled={isLoading || !identity || !password ||
+					!envFlags.hasPocketBaseUrl}
 				className="mt-5"
 			/>
 

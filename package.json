@@ -4,12 +4,19 @@
 	"main": "expo-router/entry",
 	"scripts": {
 		"android": "expo run:android",
+		"android:reset": "rm -rf android && expo prebuild --platform android --clean && expo run:android",
+		"android:prebuild:clean": "rm -rf android && expo prebuild --platform android --clean",
+		"android:build:apk": "bun run android:prebuild:clean && (cd android && ./gradlew assembleRelease)",
+		"android:build:aab": "bun run android:prebuild:clean && (cd android && ./gradlew bundleRelease)",
 		"ios": "expo run:ios",
 		"start": "expo start",
 		"prebuild": "expo prebuild",
 		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
 		"format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-		"web": "expo start --web"
+		"web": "expo start --web",
+		"postinstall": "expo-doctor --fix-dependencies",
+		"update": "expo install --fix",
+		"update:expo": "expo install expo@latest --fix"
 	},
 	"dependencies": {
 		"@expo-google-fonts/dev": "^0.4.56",

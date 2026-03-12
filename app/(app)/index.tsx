@@ -102,40 +102,8 @@ export default function Home() {
 				containerVariants({ theme: isDark ? "dark" : "light" }),
 			)}
 		>
-			{!isAllowed ? (
-				<View
-					className={cn(
-						cardVariants({ theme: isDark ? "dark" : "light" }),
-					)}
-				>
-					<Text
-						className={cn(
-							titleVariants({ theme: isDark ? "dark" : "light" }),
-							"text-xl",
-						)}
-					>
-						Access blocked
-					</Text>
-					<Text
-						className={cn(
-							subTitleVariants({
-								theme: isDark ? "dark" : "light",
-							}),
-						)}
-					>
-						Only owner/admin users can access this app. Current role:{" "}
-						{user?.role ?? "unknown"}
-					</Text>
-					<Button
-						title="Sign out"
-						onPress={() => void signOut()}
-						className="mt-4"
-					/>
-				</View>
-			) : null}
-
-			{isAllowed ? (
-				<>
+			{!isAllowed
+				? (
 					<View
 						className={cn(
 							cardVariants({ theme: isDark ? "dark" : "light" }),
@@ -149,7 +117,7 @@ export default function Home() {
 								"text-xl",
 							)}
 						>
-							Welcome, {user?.name || user?.username}
+							Access blocked
 						</Text>
 						<Text
 							className={cn(
@@ -158,63 +126,75 @@ export default function Home() {
 								}),
 							)}
 						>
-							Role: {user?.role}
+							Only owner/admin users can access this app. Current
+							role: {user?.role ?? "unknown"}
 						</Text>
+						<Button
+							title="Sign out"
+							onPress={() => void signOut()}
+							className="mt-4"
+						/>
 					</View>
+				)
+				: null}
 
-					<View
-						className={cn(
-							cardVariants({ theme: isDark ? "dark" : "light" }),
-						)}
-					>
-						<Text
+			{isAllowed
+				? (
+					<>
+						<View
 							className={cn(
-								subTitleVariants({
+								cardVariants({
 									theme: isDark ? "dark" : "light",
 								}),
 							)}
 						>
-							User-device links
-						</Text>
-						<Text
-							className={cn(
-								titleVariants({
-									theme: isDark ? "dark" : "light",
-								}),
-								"text-3xl",
-							)}
-						>
-							{summary.totalLinks}
-						</Text>
-						<Text
-							className={cn(
-								subTitleVariants({
-									theme: isDark ? "dark" : "light",
-								}),
-								"mt-3",
-							)}
-						>
-							Active: {summary.activeLinks} | Users: {summary.uniqueUsers}
-						</Text>
-					</View>
+							<Text
+								className={cn(
+									titleVariants({
+										theme: isDark ? "dark" : "light",
+									}),
+									"text-xl",
+								)}
+							>
+								Welcome, {user?.name || user?.username}
+							</Text>
+							<Text
+								className={cn(
+									subTitleVariants({
+										theme: isDark ? "dark" : "light",
+									}),
+								)}
+							>
+								Role: {user?.role}
+							</Text>
+						</View>
 
-					<View
-						className={cn(
-							cardVariants({ theme: isDark ? "dark" : "light" }),
-						)}
-					>
-						<Text
+						<View
 							className={cn(
-								titleVariants({
+								cardVariants({
 									theme: isDark ? "dark" : "light",
 								}),
-								"text-xl",
 							)}
 						>
-							Recent linked devices
-						</Text>
-
-						{isFetchingDashboard ? (
+							<Text
+								className={cn(
+									subTitleVariants({
+										theme: isDark ? "dark" : "light",
+									}),
+								)}
+							>
+								User-device links
+							</Text>
+							<Text
+								className={cn(
+									titleVariants({
+										theme: isDark ? "dark" : "light",
+									}),
+									"text-3xl",
+								)}
+							>
+								{summary.totalLinks}
+							</Text>
 							<Text
 								className={cn(
 									subTitleVariants({
@@ -223,85 +203,131 @@ export default function Home() {
 									"mt-3",
 								)}
 							>
-								Loading dashboard...
+								Active: {summary.activeLinks} | Users:{" "}
+								{summary.uniqueUsers}
 							</Text>
-						) : null}
+						</View>
 
-						{dashboardError ? (
-							<Text className="mt-3 text-sm text-rose-500">
-								{dashboardError}
-							</Text>
-						) : null}
-
-						{!isFetchingDashboard &&
-						!dashboardError &&
-						userDeviceRows.length === 0 ? (
+						<View
+							className={cn(
+								cardVariants({
+									theme: isDark ? "dark" : "light",
+								}),
+							)}
+						>
 							<Text
 								className={cn(
-									subTitleVariants({
+									titleVariants({
 										theme: isDark ? "dark" : "light",
 									}),
-									"mt-3",
+									"text-xl",
 								)}
 							>
-								No records found.
+								Recent linked devices
 							</Text>
-						) : null}
 
-						{userDeviceRows.slice(0, 8).map((row) => (
-							<View
-								key={row.id}
-								className={cn(
-									"mt-3 rounded-xl border p-3",
-									isDark
-										? "border-zinc-700"
-										: "border-zinc-200",
-								)}
-							>
-								<Text
+							{isFetchingDashboard
+								? (
+									<Text
+										className={cn(
+											subTitleVariants({
+												theme: isDark
+													? "dark"
+													: "light",
+											}),
+											"mt-3",
+										)}
+									>
+										Loading dashboard...
+									</Text>
+								)
+								: null}
+
+							{dashboardError
+								? (
+									<Text className="mt-3 text-sm text-rose-500">
+										{dashboardError}
+									</Text>
+								)
+								: null}
+
+							{!isFetchingDashboard &&
+									!dashboardError &&
+									userDeviceRows.length === 0
+								? (
+									<Text
+										className={cn(
+											subTitleVariants({
+												theme: isDark
+													? "dark"
+													: "light",
+											}),
+											"mt-3",
+										)}
+									>
+										No records found.
+									</Text>
+								)
+								: null}
+
+							{userDeviceRows.slice(0, 8).map((row) => (
+								<View
+									key={row.id}
 									className={cn(
+										"mt-3 rounded-xl border p-3",
 										isDark
-											? "text-zinc-100"
-											: "text-zinc-900",
+											? "border-zinc-700"
+											: "border-zinc-200",
 									)}
 								>
-									{row.expand?.user?.email ?? row.user}
-								</Text>
-								<Text
-									className={cn(
-										subTitleVariants({
-											theme: isDark ? "dark" : "light",
-										}),
-										"mt-1",
-									)}
-								>
-									{row.expand?.device?.expand?.info?.model ??
-										"Unknown model"}{" "}
-									| App{" "}
-									{row.expand?.device?.expand?.appVersion?.version ??
-										"-"}{" "}
-									| Active: {row.isActive ? "yes" : "no"}
-								</Text>
-							</View>
-						))}
-					</View>
+									<Text
+										className={cn(
+											isDark
+												? "text-zinc-100"
+												: "text-zinc-900",
+										)}
+									>
+										{row.expand?.user?.email ?? row.user}
+									</Text>
+									<Text
+										className={cn(
+											subTitleVariants({
+												theme: isDark
+													? "dark"
+													: "light",
+											}),
+											"mt-1",
+										)}
+									>
+										{row.expand?.device?.expand?.info
+											?.model ??
+											"Unknown model"} | App{" "}
+										{row.expand?.device?.expand?.appVersion
+											?.version ??
+											"-"} | Active:{" "}
+										{row.isActive ? "yes" : "no"}
+									</Text>
+								</View>
+							))}
+						</View>
 
-					<Button
-						title="Refresh"
-						onPress={() => void loadDashboard()}
-						className="mb-3"
-					/>
-					<Button
-						title="Refresh Auth"
-						onPress={() => void refreshAuth()}
-						className="mb-3"
-					/>
-					<Button
-						title="Sign out"
-						onPress={() => void signOut()}
-					/>
-				</>
-			) : null}
+						<Button
+							title="Refresh"
+							onPress={() => void loadDashboard()}
+							className="mb-3"
+						/>
+						<Button
+							title="Refresh Auth"
+							onPress={() => void refreshAuth()}
+							className="mb-3"
+						/>
+						<Button
+							title="Sign out"
+							onPress={() => void signOut()}
+						/>
+					</>
+				)
+				: null}
 		</ScrollView>
 	);
 }

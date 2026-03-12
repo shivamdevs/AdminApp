@@ -29,8 +29,8 @@ export default function AuthWelcome() {
 					isDark ? "text-zinc-400" : "text-zinc-600",
 				)}
 			>
-				This is the admin app onboarding screen. Replace this copy with your
-				product messaging later.
+				This is the admin app onboarding screen. Replace this copy with
+				your product messaging later.
 			</Text>
 
 			<Button
